@@ -282,7 +282,6 @@ function updateResultFontSize() {
     const container = document.getElementById("result-container");
     if (text && container && optionalButton) {
         let resutltext = text.innerHTML;
-        console.log(resutltext.length);
         if (optionalButton.style.display === "flex") {
             if (resutltext.length > 12) {
                 text.style.fontSize = "3rem";
