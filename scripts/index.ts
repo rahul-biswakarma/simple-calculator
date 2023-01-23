@@ -134,10 +134,16 @@ buttons?.addEventListener("click", (event) => {
 			operatorLastClicked = false;
 			result.innerText = btn.innerText;
 		} else if (result.innerText !== "0") {
-			result.innerText = result.innerText.concat(btn.innerText);
+			if (btn.innerText === ".") {
+				if (!result.innerText.includes("."))
+					result.innerText = result.innerText.concat(btn.innerText);
+			} else {
+				result.innerText = result.innerText.concat(btn.innerText);
+			}
 		} else {
 			result.innerText = btn.innerText;
 		}
+		updateResultFontSize();
 	}
 	if (btn.classList.contains("operator")) {
 		if (btn.innerText === "%" && result.innerText !== "0") {
@@ -156,6 +162,7 @@ buttons?.addEventListener("click", (event) => {
 			operand1 = +result.innerText;
 		}
 		operatorLastClicked = true;
+		updateResultFontSize();
 	}
 	if (btn.classList.contains("equals")) {
 		if (operatorPressed && !operatorLastClicked) {
@@ -163,7 +170,9 @@ buttons?.addEventListener("click", (event) => {
 				calculate(`${operand1}`, currentOperator, result.innerText)
 			);
 			result.innerText = "" + operand1;
+			updateResultFontSize();
 		}
+		updateResultFontSize();
 	}
 	if (btn.classList.contains("clear")) {
 		result.innerText = "0";
@@ -174,6 +183,7 @@ buttons?.addEventListener("click", (event) => {
 	if (btn.classList.contains("negative")) {
 		result.innerText = `${parseFloat(result.innerText) * -1}`;
 	}
+	updateResultFontSize();
 });
 
 document.querySelector("#square")?.addEventListener("click", () => {
@@ -181,31 +191,47 @@ document.querySelector("#square")?.addEventListener("click", () => {
 		result.innerText = `${
 			parseFloat(result.innerText) * parseFloat(result.innerText)
 		}`;
+		updateResultFontSize();
+	}
+});
+document.querySelector("#cube")?.addEventListener("click", () => {
+	if (result.innerText !== "0") {
+		result.innerText = `${
+			parseFloat(result.innerText) *
+			parseFloat(result.innerText) *
+			parseFloat(result.innerText)
+		}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#square-root")?.addEventListener("click", () => {
 	if (result.innerText !== "0") {
 		result.innerText = `${Math.sqrt(parseFloat(result.innerText))}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#cube-root")?.addEventListener("click", () => {
 	if (result.innerText !== "0") {
 		result.innerText = `${Math.cbrt(parseFloat(result.innerText))}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#quardic-root")?.addEventListener("click", () => {
 	if (result.innerText !== "0") {
 		result.innerText = `${Math.pow(parseFloat(result.innerText), 1 / 4)}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#reciprocal")?.addEventListener("click", () => {
 	if (result.innerText !== "0") {
 		result.innerText = `${1 / parseFloat(result.innerText)}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#factorial")?.addEventListener("click", () => {
 	if (result.innerText !== "0") {
 		result.innerText = `${factorial(parseFloat(result.innerText))}`;
+		updateResultFontSize();
 	}
 });
 document.querySelector("#power-of-ten")?.addEventListener("click", () => {
@@ -215,44 +241,89 @@ document.querySelector("#power-of-ten")?.addEventListener("click", () => {
 });
 document.querySelector("#natural-log")?.addEventListener("click", () => {
 	result.innerText = `${Math.log(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#rad")?.addEventListener("click", () => {
 	result.innerText = `${convertToRadians(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#rand")?.addEventListener("click", () => {
 	result.innerText = `${Math.random()}`;
+	updateResultFontSize();
 });
 document.querySelector("#log10")?.addEventListener("click", () => {
 	result.innerText = `${Math.log10(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#sin")?.addEventListener("click", () => {
 	result.innerText = `${Math.sin(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#cos")?.addEventListener("click", () => {
 	result.innerText = `${Math.cos(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#tan")?.addEventListener("click", () => {
 	result.innerText = `${Math.tan(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#e")?.addEventListener("click", () => {
 	result.innerText = `${Math.E}`;
+	updateResultFontSize();
 });
 document.querySelector("#sinh")?.addEventListener("click", () => {
 	result.innerText = `${Math.sinh(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#cosh")?.addEventListener("click", () => {
 	result.innerText = `${Math.cosh(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#tanh")?.addEventListener("click", () => {
 	result.innerText = `${Math.tanh(parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 document.querySelector("#pi")?.addEventListener("click", () => {
 	result.innerText = `${Math.PI}`;
+	updateResultFontSize();
 });
 document.querySelector("#power-of-e")?.addEventListener("click", () => {
 	result.innerText = `${Math.pow(Math.E, parseFloat(result.innerText))}`;
+	updateResultFontSize();
 });
 
 function convertToRadians(angleInDegrees: number) {
 	return angleInDegrees * (Math.PI / 180);
+}
+
+// Changing result font size
+function updateResultFontSize() {
+	const text = document.getElementById("result");
+	const container = document.getElementById("result-container");
+
+	if (text && container && optionalButton) {
+		let resutltext = text.innerHTML;
+		console.log(resutltext.length);
+		if (optionalButton.style.display === "flex") {
+			if (resutltext.length > 12) {
+				text.style.fontSize = "3rem";
+			}
+			if (resutltext.length > 18) {
+				text.style.fontSize = "2rem";
+			}
+			if (resutltext.length > 27) {
+				text.style.fontSize = "1rem";
+			}
+		} else {
+			if (resutltext.length > 4) {
+				text.style.fontSize = "2rem";
+			}
+			if (resutltext.length > 10) {
+				text.style.fontSize = "1rem";
+			}
+			if (resutltext.length > 20) {
+				text.style.fontSize = "0.7rem";
+			}
+		}
+	}
 }

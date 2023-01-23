@@ -1,5 +1,5 @@
 "use strict";
-var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
 let windowDiv = document.getElementById("window-div");
 let resultDiv = document.getElementById("result");
 let optionalButton = document.getElementById("optional-buttons");
@@ -121,11 +121,18 @@ buttons === null || buttons === void 0 ? void 0 : buttons.addEventListener("clic
             result.innerText = btn.innerText;
         }
         else if (result.innerText !== "0") {
-            result.innerText = result.innerText.concat(btn.innerText);
+            if (btn.innerText === ".") {
+                if (!result.innerText.includes("."))
+                    result.innerText = result.innerText.concat(btn.innerText);
+            }
+            else {
+                result.innerText = result.innerText.concat(btn.innerText);
+            }
         }
         else {
             result.innerText = btn.innerText;
         }
+        updateResultFontSize();
     }
     if (btn.classList.contains("operator")) {
         if (btn.innerText === "%" && result.innerText !== "0") {
@@ -144,12 +151,15 @@ buttons === null || buttons === void 0 ? void 0 : buttons.addEventListener("clic
             operand1 = +result.innerText;
         }
         operatorLastClicked = true;
+        updateResultFontSize();
     }
     if (btn.classList.contains("equals")) {
         if (operatorPressed && !operatorLastClicked) {
             operand1 = parseFloat(calculate(`${operand1}`, currentOperator, result.innerText));
             result.innerText = "" + operand1;
+            updateResultFontSize();
         }
+        updateResultFontSize();
     }
     if (btn.classList.contains("clear")) {
         result.innerText = "0";
@@ -160,76 +170,140 @@ buttons === null || buttons === void 0 ? void 0 : buttons.addEventListener("clic
     if (btn.classList.contains("negative")) {
         result.innerText = `${parseFloat(result.innerText) * -1}`;
     }
+    updateResultFontSize();
 });
 (_a = document.querySelector("#square")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${parseFloat(result.innerText) * parseFloat(result.innerText)}`;
+        updateResultFontSize();
     }
 });
-(_b = document.querySelector("#square-root")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+(_b = document.querySelector("#cube")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${parseFloat(result.innerText) *
+            parseFloat(result.innerText) *
+            parseFloat(result.innerText)}`;
+        updateResultFontSize();
+    }
+});
+(_c = document.querySelector("#square-root")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${Math.sqrt(parseFloat(result.innerText))}`;
+        updateResultFontSize();
     }
 });
-(_c = document.querySelector("#cube-root")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+(_d = document.querySelector("#cube-root")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${Math.cbrt(parseFloat(result.innerText))}`;
+        updateResultFontSize();
     }
 });
-(_d = document.querySelector("#reciprocal")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+(_e = document.querySelector("#quardic-root")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${Math.pow(parseFloat(result.innerText), 1 / 4)}`;
+        updateResultFontSize();
+    }
+});
+(_f = document.querySelector("#reciprocal")) === null || _f === void 0 ? void 0 : _f.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${1 / parseFloat(result.innerText)}`;
+        updateResultFontSize();
     }
 });
-(_e = document.querySelector("#factorial")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
+(_g = document.querySelector("#factorial")) === null || _g === void 0 ? void 0 : _g.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${factorial(parseFloat(result.innerText))}`;
+        updateResultFontSize();
     }
 });
-(_f = document.querySelector("#power-of-ten")) === null || _f === void 0 ? void 0 : _f.addEventListener("click", () => {
+(_h = document.querySelector("#power-of-ten")) === null || _h === void 0 ? void 0 : _h.addEventListener("click", () => {
     if (result.innerText !== "0") {
         result.innerText = `${Math.pow(10, parseFloat(result.innerText))}`;
     }
 });
-(_g = document.querySelector("#natural-log")) === null || _g === void 0 ? void 0 : _g.addEventListener("click", () => {
+(_j = document.querySelector("#natural-log")) === null || _j === void 0 ? void 0 : _j.addEventListener("click", () => {
     result.innerText = `${Math.log(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_h = document.querySelector("#rad")) === null || _h === void 0 ? void 0 : _h.addEventListener("click", () => {
+(_k = document.querySelector("#rad")) === null || _k === void 0 ? void 0 : _k.addEventListener("click", () => {
     result.innerText = `${convertToRadians(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_j = document.querySelector("#rand")) === null || _j === void 0 ? void 0 : _j.addEventListener("click", () => {
+(_l = document.querySelector("#rand")) === null || _l === void 0 ? void 0 : _l.addEventListener("click", () => {
     result.innerText = `${Math.random()}`;
+    updateResultFontSize();
 });
-(_k = document.querySelector("#log10")) === null || _k === void 0 ? void 0 : _k.addEventListener("click", () => {
+(_m = document.querySelector("#log10")) === null || _m === void 0 ? void 0 : _m.addEventListener("click", () => {
     result.innerText = `${Math.log10(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_l = document.querySelector("#sin")) === null || _l === void 0 ? void 0 : _l.addEventListener("click", () => {
+(_o = document.querySelector("#sin")) === null || _o === void 0 ? void 0 : _o.addEventListener("click", () => {
     result.innerText = `${Math.sin(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_m = document.querySelector("#cos")) === null || _m === void 0 ? void 0 : _m.addEventListener("click", () => {
+(_p = document.querySelector("#cos")) === null || _p === void 0 ? void 0 : _p.addEventListener("click", () => {
     result.innerText = `${Math.cos(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_o = document.querySelector("#tan")) === null || _o === void 0 ? void 0 : _o.addEventListener("click", () => {
+(_q = document.querySelector("#tan")) === null || _q === void 0 ? void 0 : _q.addEventListener("click", () => {
     result.innerText = `${Math.tan(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_p = document.querySelector("#e")) === null || _p === void 0 ? void 0 : _p.addEventListener("click", () => {
+(_r = document.querySelector("#e")) === null || _r === void 0 ? void 0 : _r.addEventListener("click", () => {
     result.innerText = `${Math.E}`;
+    updateResultFontSize();
 });
-(_q = document.querySelector("#sinh")) === null || _q === void 0 ? void 0 : _q.addEventListener("click", () => {
+(_s = document.querySelector("#sinh")) === null || _s === void 0 ? void 0 : _s.addEventListener("click", () => {
     result.innerText = `${Math.sinh(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_r = document.querySelector("#cosh")) === null || _r === void 0 ? void 0 : _r.addEventListener("click", () => {
+(_t = document.querySelector("#cosh")) === null || _t === void 0 ? void 0 : _t.addEventListener("click", () => {
     result.innerText = `${Math.cosh(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_s = document.querySelector("#tanh")) === null || _s === void 0 ? void 0 : _s.addEventListener("click", () => {
+(_u = document.querySelector("#tanh")) === null || _u === void 0 ? void 0 : _u.addEventListener("click", () => {
     result.innerText = `${Math.tanh(parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
-(_t = document.querySelector("#pi")) === null || _t === void 0 ? void 0 : _t.addEventListener("click", () => {
+(_v = document.querySelector("#pi")) === null || _v === void 0 ? void 0 : _v.addEventListener("click", () => {
     result.innerText = `${Math.PI}`;
+    updateResultFontSize();
 });
-(_u = document.querySelector("#power-of-e")) === null || _u === void 0 ? void 0 : _u.addEventListener("click", () => {
+(_w = document.querySelector("#power-of-e")) === null || _w === void 0 ? void 0 : _w.addEventListener("click", () => {
     result.innerText = `${Math.pow(Math.E, parseFloat(result.innerText))}`;
+    updateResultFontSize();
 });
 function convertToRadians(angleInDegrees) {
     return angleInDegrees * (Math.PI / 180);
+}
+// Changing result font size
+function updateResultFontSize() {
+    const text = document.getElementById("result");
+    const container = document.getElementById("result-container");
+    if (text && container && optionalButton) {
+        let resutltext = text.innerHTML;
+        console.log(resutltext.length);
+        if (optionalButton.style.display === "flex") {
+            if (resutltext.length > 12) {
+                text.style.fontSize = "3rem";
+            }
+            if (resutltext.length > 18) {
+                text.style.fontSize = "2rem";
+            }
+            if (resutltext.length > 27) {
+                text.style.fontSize = "1rem";
+            }
+        }
+        else {
+            if (resutltext.length > 4) {
+                text.style.fontSize = "2rem";
+            }
+            if (resutltext.length > 10) {
+                text.style.fontSize = "1rem";
+            }
+            if (resutltext.length > 20) {
+                text.style.fontSize = "0.7rem";
+            }
+        }
+    }
 }
