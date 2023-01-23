@@ -15,7 +15,7 @@
 		class="relative min-h-[100vh] h-full w-full overflow-hidden select-none bg-cover bg-center">
 		<div id="window-div"
 			class="absolute bg-[#000]/30 backdrop-blur-3xl border-[1px] text-white font-[500] text-[1rem] border-[#49494e] rounded-lg">
-			<div class="w-full h-[100px] flex justify-end items-end px-3 py-2 text-7xl">
+			<div id="result" class="w-full h-[100px] flex justify-end items-end px-3 py-2 text-7xl">
 				0
 			</div>
 			<div class="flex gap-[1px]">
@@ -39,134 +39,134 @@
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							2<sup>nd</sup>
 						</span>
-						<span
+						<span id="square"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							x<sup>2</sup>
 						</span>
-						<span
+						<span id="cube"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							x<sup>3</sup>
 						</span>
-						<span
+						<span id="power-of"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							x<sup>y</sup>
 						</span>
-						<span
+						<span id="power-of-e"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							e<sup>x</sup>
 						</span>
-						<span
+						<span id="power-of-ten"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							10<sup>x</sup>
 						</span>
 					</div>
 					<div class="flex gap-[1px]">
-						<span
+						<span id="factorial"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">x!</span>
-						<span
+						<span id="sin"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">sin</span>
-						<span
+						<span id="cos"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">cos</span>
-						<span
+						<span id="tan"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">tan</span>
-						<span
+						<span id="e"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">e</span>
 						<span
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">EE</span>
 					</div>
 					<div class="flex gap-[1px]">
-						<span
+						<span id="reciprocal"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							<sup>1</sup>/<sub>x</sub>
 						</span>
-						<span
+						<span id="square-root"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">&#8730;x</span>
-						<span
+						<span id="cube-root"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">&#8731;x</span>
-						<span
+						<span id="quardic-root"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">&#8732;x</span>
-						<span
+						<span id="natural-log"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">ln</span>
-						<span
+						<span id="log10"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							log<sub>10</sub>
 						</span>
 					</div>
 					<div class="flex gap-[1px]">
-						<span
+						<span id="rad"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">Rad</span>
-						<span
+						<span id="sinh"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">sinh</span>
-						<span
+						<span id="cosh"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">cosh</span>
-						<span
+						<span id="tanh"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">tanh</span>
-						<span
+						<span id="pi"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">&pi;</span>
-						<span
+						<span id="rand"
 							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">Rand</span>
 					</div>
 				</div>
 
-				<div id="default-buttons" class="flex flex-col gap-[1px]">
+				<div id="buttons" class="flex flex-col gap-[1px]">
 					<div class="flex gap-[1px]">
 						<span
-							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">AC</span>
+							class="clear w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">AC</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
+							class="negative w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">
 							<sup>+</sup>/<sub> - </sub>
 						</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">%</span>
+							class="operator w-[50px] h-[50px] bg-white/5 backdrop-blur-sm flex justify-center items-center border-none">%</span>
 						<span
-							class="w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">&divide;</span>
+							class="operator w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">&divide;</span>
 					</div>
 					<div class="flex gap-[1px]">
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
 							7
 						</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
 							8
 						</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">
 							9
 						</span>
 						<span
-							class="w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
+							class="operator w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
 							x
 						</span>
 					</div>
 					<div class="flex gap-[1px]">
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">4</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">4</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">5</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">5</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">6</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">6</span>
 						<span
-							class="w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
+							class="operator w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
 							- </span>
 					</div>
 					<div class="flex gap-[1px]">
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">1</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">1</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">2</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">2</span>
 						<span
-							class="w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">3</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">3</span>
 						<span
-							class="w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">+</span>
+							class="operator w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">+</span>
 					</div>
 					<div class="flex gap-[1px]">
 						<span
-							class="h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none w-[101px]">0</span>
+							class="number h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none w-[101px]">0</span>
 						<span
-							class=" w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">.</span>
+							class="number w-[50px] h-[50px] bg-white/30 backdrop-blur-sm flex justify-center items-center border-none">.</span>
 						<span
-							class="w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
+							class="equals w-[50px] h-[50px] bg-[#ff9f1c] backdrop-blur-xl flex justify-center items-center border-none">
 							= </span>
 					</div>
 				</div>

@@ -1,5 +1,7 @@
 "use strict";
+var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u;
 let windowDiv = document.getElementById("window-div");
+let resultDiv = document.getElementById("result");
 let optionalButton = document.getElementById("optional-buttons");
 let maximizeButton = document.getElementById("maximize-button");
 document.addEventListener("DOMContentLoaded", () => {
@@ -18,8 +20,8 @@ document.addEventListener("DOMContentLoaded", () => {
         if (optionalButton)
             optionalButton.style.display = "none";
     }
-    if (windowDiv)
-        windowDiv.addEventListener("mousedown", dragMouseDown);
+    if (resultDiv)
+        resultDiv.addEventListener("mousedown", dragMouseDown);
     if (maximizeButton)
         maximizeButton.addEventListener("click", handleMaximizeButtonClick);
 });
@@ -70,4 +72,164 @@ function handleMaximizeButtonClick() {
             localStorage.setItem("calculatorMaximized", "false");
         }
     }
+}
+// Calculator.ts
+function factorial(num) {
+    let factorial = 1;
+    for (let i = 1; i <= num; i++) {
+        factorial = factorial * i;
+    }
+    return factorial;
+}
+const calculate = (operand, operator, result) => {
+    switch (operator) {
+        case "+":
+            {
+                operand = `${parseFloat(operand) + parseFloat(result)}`;
+            }
+            break;
+        case "-":
+            {
+                operand = `${parseFloat(operand) - parseFloat(result)}`;
+            }
+            break;
+        case "x":
+            {
+                operand = `${parseFloat(operand) * parseFloat(result)}`;
+            }
+            break;
+        case "/":
+            {
+                operand = `${parseFloat(operand) / parseFloat(result)}`;
+            }
+            break;
+    }
+    return operand;
+};
+var operatorPressed = false;
+var operatorLastClicked = false;
+var currentOperator;
+var operand1;
+var operand2;
+const buttons = document.querySelector("#buttons");
+const result = document.querySelector("#result");
+buttons === null || buttons === void 0 ? void 0 : buttons.addEventListener("click", (event) => {
+    let btn = event.target;
+    if (btn.classList.contains("number")) {
+        if (operatorLastClicked) {
+            operatorLastClicked = false;
+            result.innerText = btn.innerText;
+        }
+        else if (result.innerText !== "0") {
+            result.innerText = result.innerText.concat(btn.innerText);
+        }
+        else {
+            result.innerText = btn.innerText;
+        }
+    }
+    if (btn.classList.contains("operator")) {
+        if (btn.innerText === "%" && result.innerText !== "0") {
+            result.innerText = "" + parseFloat(result.innerText) / 100;
+            operand1 = parseFloat(result.innerText);
+        }
+        else if (!operatorPressed) {
+            operand1 = parseFloat(result.innerText);
+            operatorPressed = true;
+            currentOperator = btn.innerText;
+        }
+        else {
+            operand1 = parseFloat(calculate(`${operand1}`, currentOperator, result.innerText));
+            result.innerText = "" + operand1;
+            currentOperator = btn.innerText;
+            operand1 = +result.innerText;
+        }
+        operatorLastClicked = true;
+    }
+    if (btn.classList.contains("equals")) {
+        if (operatorPressed && !operatorLastClicked) {
+            operand1 = parseFloat(calculate(`${operand1}`, currentOperator, result.innerText));
+            result.innerText = "" + operand1;
+        }
+    }
+    if (btn.classList.contains("clear")) {
+        result.innerText = "0";
+        operand1 = 0;
+        operatorPressed = false;
+        operatorLastClicked = false;
+    }
+    if (btn.classList.contains("negative")) {
+        result.innerText = `${parseFloat(result.innerText) * -1}`;
+    }
+});
+(_a = document.querySelector("#square")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${parseFloat(result.innerText) * parseFloat(result.innerText)}`;
+    }
+});
+(_b = document.querySelector("#square-root")) === null || _b === void 0 ? void 0 : _b.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${Math.sqrt(parseFloat(result.innerText))}`;
+    }
+});
+(_c = document.querySelector("#cube-root")) === null || _c === void 0 ? void 0 : _c.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${Math.cbrt(parseFloat(result.innerText))}`;
+    }
+});
+(_d = document.querySelector("#reciprocal")) === null || _d === void 0 ? void 0 : _d.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${1 / parseFloat(result.innerText)}`;
+    }
+});
+(_e = document.querySelector("#factorial")) === null || _e === void 0 ? void 0 : _e.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${factorial(parseFloat(result.innerText))}`;
+    }
+});
+(_f = document.querySelector("#power-of-ten")) === null || _f === void 0 ? void 0 : _f.addEventListener("click", () => {
+    if (result.innerText !== "0") {
+        result.innerText = `${Math.pow(10, parseFloat(result.innerText))}`;
+    }
+});
+(_g = document.querySelector("#natural-log")) === null || _g === void 0 ? void 0 : _g.addEventListener("click", () => {
+    result.innerText = `${Math.log(parseFloat(result.innerText))}`;
+});
+(_h = document.querySelector("#rad")) === null || _h === void 0 ? void 0 : _h.addEventListener("click", () => {
+    result.innerText = `${convertToRadians(parseFloat(result.innerText))}`;
+});
+(_j = document.querySelector("#rand")) === null || _j === void 0 ? void 0 : _j.addEventListener("click", () => {
+    result.innerText = `${Math.random()}`;
+});
+(_k = document.querySelector("#log10")) === null || _k === void 0 ? void 0 : _k.addEventListener("click", () => {
+    result.innerText = `${Math.log10(parseFloat(result.innerText))}`;
+});
+(_l = document.querySelector("#sin")) === null || _l === void 0 ? void 0 : _l.addEventListener("click", () => {
+    result.innerText = `${Math.sin(parseFloat(result.innerText))}`;
+});
+(_m = document.querySelector("#cos")) === null || _m === void 0 ? void 0 : _m.addEventListener("click", () => {
+    result.innerText = `${Math.cos(parseFloat(result.innerText))}`;
+});
+(_o = document.querySelector("#tan")) === null || _o === void 0 ? void 0 : _o.addEventListener("click", () => {
+    result.innerText = `${Math.tan(parseFloat(result.innerText))}`;
+});
+(_p = document.querySelector("#e")) === null || _p === void 0 ? void 0 : _p.addEventListener("click", () => {
+    result.innerText = `${Math.E}`;
+});
+(_q = document.querySelector("#sinh")) === null || _q === void 0 ? void 0 : _q.addEventListener("click", () => {
+    result.innerText = `${Math.sinh(parseFloat(result.innerText))}`;
+});
+(_r = document.querySelector("#cosh")) === null || _r === void 0 ? void 0 : _r.addEventListener("click", () => {
+    result.innerText = `${Math.cosh(parseFloat(result.innerText))}`;
+});
+(_s = document.querySelector("#tanh")) === null || _s === void 0 ? void 0 : _s.addEventListener("click", () => {
+    result.innerText = `${Math.tanh(parseFloat(result.innerText))}`;
+});
+(_t = document.querySelector("#pi")) === null || _t === void 0 ? void 0 : _t.addEventListener("click", () => {
+    result.innerText = `${Math.PI}`;
+});
+(_u = document.querySelector("#power-of-e")) === null || _u === void 0 ? void 0 : _u.addEventListener("click", () => {
+    result.innerText = `${Math.pow(Math.E, parseFloat(result.innerText))}`;
+});
+function convertToRadians(angleInDegrees) {
+    return angleInDegrees * (Math.PI / 180);
 }
